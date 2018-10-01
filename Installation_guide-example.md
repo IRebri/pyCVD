@@ -12,8 +12,8 @@ Example (01.10.2018):
 4. clone pyCVD on ["github/..."](https://github.com/IRebri/pyCVD.git) - program in Python to control gas mixture flows. In this case folder we clone it in such way that we have C:/pyCVD/gui/gascontrol
 5. pyCVD constructed on ["pymata_aio"](https://github.com/MrYsLab/pymata-aio). If you do not have this package you should install it, e.g. in command line (cmd.exe) write "pip install pymata_aio"
 6. We will use the "shorcut" in order to run pyCVD:
-6a. Move shorcut "plasmaCVD"  from C:/pyCVD/gui/gascontrol/plasmaCVD to any convinient place, e.g. we move it to the Desktop.
-6b. Right-click on shortcut>Properties. Make shure that Target properly constracted (it say's "to run cmd.exe", then open folder "C:/pyCVD/gui/gascontrol", and run by "python gascontrol.py")
+	- 6a. Move shorcut "plasmaCVD"  from C:/pyCVD/gui/gascontrol/plasmaCVD to any convinient place, e.g. we move it to the Desktop.
+	- 6b. Right-click on shortcut>Properties. Make shure that Target properly constracted (it say's "to run cmd.exe", then open folder "C:/pyCVD/gui/gascontrol", and run by "python gascontrol.py")
 7. Run the program by clicking on shortcut
 
 P.S.
