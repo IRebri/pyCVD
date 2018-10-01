@@ -7,8 +7,8 @@ Example (01.10.2018):
 1. Install Arduino IDE on computer
 2. Plug In board and let Windows to install driver (additional COM port should appear in OS)
 3. In Arduino IDE (this case Arduino 1.8.7 (Windows Store 1.8.15.0)):
-	3a. select proper Board, Processor, Port in Tools menu, e.g. Tools>Board>Processor:..>ATmega328P (Old Bootloader)
-	3b. open sketch File>Examples>Firmata>StandardFirmata and load on board
+	- 3a. select proper Board, Processor, Port in Tools menu, e.g. Tools>Board>Processor:..>ATmega328P (Old Bootloader)
+	- 3b. open sketch File>Examples>Firmata>StandardFirmata and load on board
 4. clone pyCVD on ["github/..."](https://github.com/IRebri/pyCVD.git) - program in Python to control gas mixture flows. In this case folder we clone it in such way that we have C:/pyCVD/gui/gascontrol
 5. pyCVD constructed on ["pymata_aio"](https://github.com/MrYsLab/pymata-aio). If you do not have this package you should install it, e.g. in command line (cmd.exe) write "pip install pymata_aio"
 6. We will use the "shorcut" in order to run pyCVD:
