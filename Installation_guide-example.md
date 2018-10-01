@@ -1,8 +1,8 @@
 Installation guide for pyCVD
 ============================
-Exapmle (01.10.2018):
-- new Yepo notebook with Windows 10 and installed Python 3.6 (Anaconda bundle)
-- non official Arduino Nano board (2017)
+Example (01.10.2018):
+- new Yepo notebook with installed Windows 10 and Python 3.6 (Anaconda bundle)
+- non official Arduino-Nano board (2017)
 
 1. Install Arduino IDE on computer
 2. Plug In board and let Windows to install driver (additional COM port should appear in OS)
