@@ -41,6 +41,8 @@ class GasControlGUI:
         self.connectCrossActions()
         self.updateData()           # is this really needed? Check and remove (just in case)
         self.initMonitorModule()
+        self.pressure_tick_counter = 0 # first plugin for decresing presure range current 9,7 - 9.2kPa (10s - SPump is On)... by time ticks
+
 
     def initEquipmentStates(self):
         self.isONBPump = False  # physical initial states of equipments - Big pump OFF
@@ -64,7 +66,7 @@ class GasControlGUI:
 
     def initAutoPressureModule(self):
         self.autoPressureState = False  # initially working mode is manual
-        self.TIMER_INTERVAL = 2000 # time in msec
+        self.TIMER_INTERVAL = 1000 # time in msec #was 2000
         self.autoPressureTimer = QtCore.QTimer()
         self.autoPressureTimer.timeout.connect(self.autoPressureTick)
         self.autoPressureTimer.setInterval(self.TIMER_INTERVAL)
@@ -311,6 +313,7 @@ class GasControlGUI:
 
     def autoPressureTick(self):
         logging.debug('PressureTick!')
+        self.pressure_tick_counter += 1
         #TODO realize pressure control logic (PID +-0.5kPa)
         # if we buy pressure controller (use PID algorithms)
         #  http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-introduction/
@@ -319,17 +322,26 @@ class GasControlGUI:
 
         # logging.debug('PressureTick! {} {} {}'.format(type(self.gasPressureVal), type(self.gasPressureSet), type(self.isONSOutletValve)))
 
-        if (float(self.gasPressureVal) > (self.gasPressureSet + 0.2)) and (not self.isONSOutletValve):
+
+        # Pump condition
+        if (float(self.gasPressureVal) > (self.gasPressureSet + 0.1)) and (not self.isONSOutletValve): #was +0.2
+            self.pressure_tick_counter = -1000
             self._mw.btnSmallGasOutletValve.setEnabled(True)
             logging.debug('PressureTick! {}'.format('in first'))
             self._mw.btnSmallGasOutletValve.click()
             self._mw.btnSmallGasOutletValve.setEnabled(False)
 
-        if (float(self.gasPressureVal) < (self.gasPressureSet - 0.3)) and (self.isONSOutletValve):
+#       stop pump condition
+        #  if (float(self.gasPressureVal) < (self.gasPressureSet - 0.3)) and (self.isONSOutletValve):
+        if (float(self.gasPressureVal) < (self.gasPressureSet + 0.1)) and (self.isONSOutletValve) and (self.pressure_tick_counter > (-998)):
+            self.pressure_tick_counter = 0
             self._mw.btnSmallGasOutletValve.setEnabled(True)
             self._mw.btnSmallGasOutletValve.click()
             logging.debug('PressureTick! {}'.format('in second'))
             self._mw.btnSmallGasOutletValve.setEnabled(False)
+
+        if self.pressure_tick_counter > 10000:  # not to overflow
+            self.pressure_tick_counter = 0
 
 
             #################################################################
